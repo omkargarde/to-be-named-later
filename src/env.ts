@@ -9,5 +9,10 @@ export const t3env = createEnv({
   },
   clientPrefix: "PUBLIC_",
   client: {},
-  runtimeEnv: process.env,
+
+  runtimeEnv: {
+    CLOUDFLARE_ACCOUNT_ID: process.env.CLOUDFLARE_ACCOUNT_ID,
+    CLOUDFLARE_DATABASE_ID: process.env.CLOUDFLARE_DATABASE_ID,
+    CLOUDFLARE_D1_TOKEN: process.env.CLOUDFLARE_D1_TOKEN,
+  },
 });
