@@ -1,3 +1,4 @@
+import { t3env } from "@/env";
 import { drizzle } from "drizzle-orm/d1";
 
 export default {
@@ -5,3 +6,4 @@ export default {
     const db = drizzle(env.ecommerce_d1);
   },
 };
+export const orm = drizzle(t3env.ecommerce_d1);

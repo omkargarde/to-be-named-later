@@ -6,10 +6,10 @@ This project is a TanStack React app deployed on Cloudflare Workers with D1 data
 
 Create a `.env` file with these variables:
 
-```
-CLOUDFLARE_ACCOUNT_ID=your_account_id
-CLOUDFLARE_DATABASE_ID=your_database_id
-CLOUDFLARE_D1_TOKEN=your_d1_token
+```typescript
+CLOUDFLARE_ACCOUNT_ID = your_account_id;
+CLOUDFLARE_DATABASE_ID = your_database_id;
+CLOUDFLARE_D1_TOKEN = your_d1_token;
 ```
 
 ## Common Commands
@@ -31,7 +31,8 @@ NOTE: always use bun, do not use npm
 - `bunx drizzle-kit generate` - Generate database migrations
 - `bunx drizzle-kit migrate` - Run database migrations
 - `bunx drizzle-kit studio` - Open Drizzle Studio for database management
-- `bunx wrangler d1 execute ecommerce_d1 --local --file=./drizzle/0000_xxxx.sql` - Execute SQL locally
+- `bunx wrangler d1 execute
+ecommerce_d1 --local --file=./drizzle/0000_xxxx.sql` - Execute SQL locally
 
 ### Type Generation
 
