@@ -9,6 +9,9 @@ export const HTTP_STATUS_CODE = {
   INTERNAL_SERVER_ERROR: 500,
 } as const;
 
+export type HTTP_STATUS_CODE_VALUES =
+  (typeof HTTP_STATUS_CODE)[keyof typeof HTTP_STATUS_CODE];
+
 export const HTTP_STATUS_PHRASE = {
   OK: "OK",
   CREATED: "Created",
