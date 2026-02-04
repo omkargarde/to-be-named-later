@@ -1,16 +1,16 @@
-import { sql } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import {
   check,
   int,
   integer,
-  numeric,
   sqliteTable,
   text,
 } from "drizzle-orm/sqlite-core";
 
 export const usersTable = sqliteTable("users_table", {
-  id: integer("id").notNull().primaryKey(),
-  name: text("name").notNull(),
+  id: integer("id").primaryKey(),
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name").notNull(),
   email: text("email").notNull().unique(),
   passwordHash: text("password_hash").notNull(),
   role: text("role", { enum: ["user", "admin"] }).notNull(),
@@ -23,14 +23,26 @@ export const usersTable = sqliteTable("users_table", {
     .$onUpdateFn(() => sql`(current_timestamp)`),
 });
 
+export const userRelations = relations(usersTable, ({ many }) => ({
+  sessions: many(sessionTable),
+}));
+
+export const sessionTable = sqliteTable("session_table", {
+  id: integer("id").primaryKey(),
+  expiresAt: integer("expires_at", { mode: "timestamp_ms" }),
+  userId: integer("user_id").references(() => usersTable.id, {
+    onDelete: "cascade",
+  }),
+});
+
 export const productsTable = sqliteTable("products_table", {
-  id: integer("id").notNull().primaryKey(),
+  id: integer("id").primaryKey(),
   name: text("name").notNull(),
   description: text("description"),
-  priceInPaisa: numeric("price_in_paisa").notNull(),
+  priceInPaisa: integer("price_in_paisa").notNull(),
   category: text("category"),
   isActive: integer("is_active", { mode: "boolean" }).default(sql`true`),
-  createAt: text("created_at")
+  createdAt: text("created_at")
     .notNull()
     .default(sql`(current_timestamp)`),
   updatedAt: text("updated_at")
@@ -39,8 +51,8 @@ export const productsTable = sqliteTable("products_table", {
     .$onUpdateFn(() => sql`(current_timestamp)`),
 });
 
-const ordersTable = sqliteTable("orders_table", {
-  id: integer("id").notNull().primaryKey(),
+export const ordersTable = sqliteTable("orders_table", {
+  id: integer("id").primaryKey(),
   userId: integer("user_id")
     .references(() => usersTable.id, {
       onDelete: "cascade",
@@ -58,8 +70,8 @@ const ordersTable = sqliteTable("orders_table", {
   })
     .notNull()
     .default("pending"),
-  totalAmountInPaisa: numeric("total_amount_in_paisa").notNull(),
-  createAt: text("created_at")
+  totalAmountInPaisa: integer("total_amount_in_paisa").notNull(),
+  createdAt: text("created_at")
     .notNull()
     .default(sql`(current_timestamp)`),
   updatedAt: text("updated_at")
@@ -68,10 +80,10 @@ const ordersTable = sqliteTable("orders_table", {
     .$onUpdateFn(() => sql`(current_timestamp)`),
 });
 
-const orderItemsTable = sqliteTable(
+export const orderItemsTable = sqliteTable(
   "order_items_table",
   {
-    id: integer("id").notNull().primaryKey(),
+    id: integer("id").primaryKey(),
     orderId: integer("order_id")
       .references(() => ordersTable.id, {
         onDelete: "cascade",
@@ -85,10 +97,7 @@ const orderItemsTable = sqliteTable(
     quantity: int("quantity").notNull(),
     priceInPaisa: int("price_in_paisa").notNull(),
   },
-  (table) => ({
-    quantityCheck: check(
-      "quantity_greater_than_zero_check",
-      sql`${table.quantity}>0`,
-    ),
-  }),
+  (table) => [
+    check("quantity_greater_than_zero_check", sql`${table.quantity}>0`),
+  ],
 );
