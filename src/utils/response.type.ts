@@ -13,9 +13,7 @@ export interface Pagination {
   totalPages: number;
 }
 
-export type TApiResponse<T> =
-  | { ok: true; data: T }
-  | { ok: false; error: ApiError };
+export type TApiResponse<T> = { ok: true; data: T } | { ok: false; error: ApiError };
 
 export type TApiResponseWithPagination<T> =
   | { ok: true; data: T; pagination: Pagination }

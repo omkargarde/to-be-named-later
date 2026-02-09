@@ -12,7 +12,11 @@
     "db:push": "npx drizzle-kit push",
     "db:gen": "npx drizzle-kit generate",
     "db:mig": "npx drizzle-kit migrate",
-    "cf-typegen": "wrangler types"
+    "cf-typegen": "wrangler types",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check"
   },
   "dependencies": {
     "@cloudflare/vite-plugin": "^1.13.8",
@@ -45,11 +49,15 @@
     "@vitejs/plugin-react": "^5.0.4",
     "drizzle-kit": "^0.31.8",
     "jsdom": "^27.0.0",
+    "oxlint": "^1.43.0",
     "tsx": "^4.21.0",
     "typescript": "^5.7.2",
     "vite": "^7.1.7",
     "vitest": "^3.0.5",
     "web-vitals": "^5.1.0",
     "wrangler": "^4.61.1"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "bun run lint"
   }
 }
