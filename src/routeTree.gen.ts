@@ -12,7 +12,7 @@ import { Route as rootRouteImport } from "./routes/__root";
 import { Route as IndexRouteImport } from "./routes/index";
 import { Route as ApiV1AuthSignUpRouteImport } from "./routes/api/v1/auth/sign-up";
 import { Route as ApiV1AuthSignInRouteImport } from "./routes/api/v1/auth/sign-in";
-import { Route as ApiV1AuthMeRouteImport } from "./routes/api/v1/auth/me";
+import { Route as ApiV1AuthMeRouteImport } from "./routes/api/v1/auth/current-session.ts";
 
 const IndexRoute = IndexRouteImport.update({
   id: "/",
