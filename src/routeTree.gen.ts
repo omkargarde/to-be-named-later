@@ -8,115 +8,128 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from "./routes/__root";
-import { Route as IndexRouteImport } from "./routes/index";
-import { Route as ApiV1AuthSignUpRouteImport } from "./routes/api/v1/auth/sign-up";
-import { Route as ApiV1AuthSignInRouteImport } from "./routes/api/v1/auth/sign-in";
-import { Route as ApiV1AuthMeRouteImport } from "./routes/api/v1/auth/current-session.ts";
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiV1AuthSignUpRouteImport } from './routes/api/v1/auth/sign-up'
+import { Route as ApiV1AuthSignInRouteImport } from './routes/api/v1/auth/sign-in'
+import { Route as ApiV1AuthCurrentSessionRouteImport } from './routes/api/v1/auth/current-session'
 
 const IndexRoute = IndexRouteImport.update({
-  id: "/",
-  path: "/",
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const ApiV1AuthSignUpRoute = ApiV1AuthSignUpRouteImport.update({
-  id: "/api/v1/auth/sign-up",
-  path: "/api/v1/auth/sign-up",
+  id: '/api/v1/auth/sign-up',
+  path: '/api/v1/auth/sign-up',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const ApiV1AuthSignInRoute = ApiV1AuthSignInRouteImport.update({
-  id: "/api/v1/auth/sign-in",
-  path: "/api/v1/auth/sign-in",
+  id: '/api/v1/auth/sign-in',
+  path: '/api/v1/auth/sign-in',
   getParentRoute: () => rootRouteImport,
-} as any);
-const ApiV1AuthMeRoute = ApiV1AuthMeRouteImport.update({
-  id: "/api/v1/auth/me",
-  path: "/api/v1/auth/me",
+} as any)
+const ApiV1AuthCurrentSessionRoute = ApiV1AuthCurrentSessionRouteImport.update({
+  id: '/api/v1/auth/current-session',
+  path: '/api/v1/auth/current-session',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 
 export interface FileRoutesByFullPath {
-  "/": typeof IndexRoute;
-  "/api/v1/auth/me": typeof ApiV1AuthMeRoute;
-  "/api/v1/auth/sign-in": typeof ApiV1AuthSignInRoute;
-  "/api/v1/auth/sign-up": typeof ApiV1AuthSignUpRoute;
+  '/': typeof IndexRoute
+  '/api/v1/auth/current-session': typeof ApiV1AuthCurrentSessionRoute
+  '/api/v1/auth/sign-in': typeof ApiV1AuthSignInRoute
+  '/api/v1/auth/sign-up': typeof ApiV1AuthSignUpRoute
 }
 export interface FileRoutesByTo {
-  "/": typeof IndexRoute;
-  "/api/v1/auth/me": typeof ApiV1AuthMeRoute;
-  "/api/v1/auth/sign-in": typeof ApiV1AuthSignInRoute;
-  "/api/v1/auth/sign-up": typeof ApiV1AuthSignUpRoute;
+  '/': typeof IndexRoute
+  '/api/v1/auth/current-session': typeof ApiV1AuthCurrentSessionRoute
+  '/api/v1/auth/sign-in': typeof ApiV1AuthSignInRoute
+  '/api/v1/auth/sign-up': typeof ApiV1AuthSignUpRoute
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport;
-  "/": typeof IndexRoute;
-  "/api/v1/auth/me": typeof ApiV1AuthMeRoute;
-  "/api/v1/auth/sign-in": typeof ApiV1AuthSignInRoute;
-  "/api/v1/auth/sign-up": typeof ApiV1AuthSignUpRoute;
+  __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/api/v1/auth/current-session': typeof ApiV1AuthCurrentSessionRoute
+  '/api/v1/auth/sign-in': typeof ApiV1AuthSignInRoute
+  '/api/v1/auth/sign-up': typeof ApiV1AuthSignUpRoute
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/" | "/api/v1/auth/me" | "/api/v1/auth/sign-in" | "/api/v1/auth/sign-up";
-  fileRoutesByTo: FileRoutesByTo;
-  to: "/" | "/api/v1/auth/me" | "/api/v1/auth/sign-in" | "/api/v1/auth/sign-up";
-  id: "__root__" | "/" | "/api/v1/auth/me" | "/api/v1/auth/sign-in" | "/api/v1/auth/sign-up";
-  fileRoutesById: FileRoutesById;
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths:
+    | '/'
+    | '/api/v1/auth/current-session'
+    | '/api/v1/auth/sign-in'
+    | '/api/v1/auth/sign-up'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/api/v1/auth/current-session'
+    | '/api/v1/auth/sign-in'
+    | '/api/v1/auth/sign-up'
+  id:
+    | '__root__'
+    | '/'
+    | '/api/v1/auth/current-session'
+    | '/api/v1/auth/sign-in'
+    | '/api/v1/auth/sign-up'
+  fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  ApiV1AuthMeRoute: typeof ApiV1AuthMeRoute;
-  ApiV1AuthSignInRoute: typeof ApiV1AuthSignInRoute;
-  ApiV1AuthSignUpRoute: typeof ApiV1AuthSignUpRoute;
+  IndexRoute: typeof IndexRoute
+  ApiV1AuthCurrentSessionRoute: typeof ApiV1AuthCurrentSessionRoute
+  ApiV1AuthSignInRoute: typeof ApiV1AuthSignInRoute
+  ApiV1AuthSignUpRoute: typeof ApiV1AuthSignUpRoute
 }
 
-declare module "@tanstack/react-router" {
+declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    "/": {
-      id: "/";
-      path: "/";
-      fullPath: "/";
-      preLoaderRoute: typeof IndexRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/api/v1/auth/sign-up": {
-      id: "/api/v1/auth/sign-up";
-      path: "/api/v1/auth/sign-up";
-      fullPath: "/api/v1/auth/sign-up";
-      preLoaderRoute: typeof ApiV1AuthSignUpRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/api/v1/auth/sign-in": {
-      id: "/api/v1/auth/sign-in";
-      path: "/api/v1/auth/sign-in";
-      fullPath: "/api/v1/auth/sign-in";
-      preLoaderRoute: typeof ApiV1AuthSignInRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/api/v1/auth/me": {
-      id: "/api/v1/auth/me";
-      path: "/api/v1/auth/me";
-      fullPath: "/api/v1/auth/me";
-      preLoaderRoute: typeof ApiV1AuthMeRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/auth/sign-up': {
+      id: '/api/v1/auth/sign-up'
+      path: '/api/v1/auth/sign-up'
+      fullPath: '/api/v1/auth/sign-up'
+      preLoaderRoute: typeof ApiV1AuthSignUpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/auth/sign-in': {
+      id: '/api/v1/auth/sign-in'
+      path: '/api/v1/auth/sign-in'
+      fullPath: '/api/v1/auth/sign-in'
+      preLoaderRoute: typeof ApiV1AuthSignInRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/auth/current-session': {
+      id: '/api/v1/auth/current-session'
+      path: '/api/v1/auth/current-session'
+      fullPath: '/api/v1/auth/current-session'
+      preLoaderRoute: typeof ApiV1AuthCurrentSessionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ApiV1AuthMeRoute: ApiV1AuthMeRoute,
+  ApiV1AuthCurrentSessionRoute: ApiV1AuthCurrentSessionRoute,
   ApiV1AuthSignInRoute: ApiV1AuthSignInRoute,
   ApiV1AuthSignUpRoute: ApiV1AuthSignUpRoute,
-};
+}
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()
 
-import type { getRouter } from "./router.tsx";
-import type { createStart } from "@tanstack/react-start";
-declare module "@tanstack/react-start" {
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
   interface Register {
-    ssr: true;
-    router: Awaited<ReturnType<typeof getRouter>>;
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
   }
 }

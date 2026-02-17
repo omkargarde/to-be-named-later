@@ -2,7 +2,7 @@ import { relations, sql } from "drizzle-orm";
 import { check, int, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 export const usersTable = sqliteTable("users_table", {
-  id: text("id").primaryKey(),
+  id: integer("id").primaryKey(),
   firstName: text("first_name").notNull(),
   lastName: text("last_name").notNull(),
   email: text("email").notNull().unique(),
@@ -22,15 +22,17 @@ export const userRelations = relations(usersTable, ({ many }) => ({
 }));
 
 export const sessionTable = sqliteTable("session_table", {
-  id: text("id").primaryKey(),
+  id: integer("id").primaryKey(),
+  sessionId: text("session_id"),
   expiresAt: integer("expires_at", { mode: "timestamp_ms" }),
   userId: text("user_id").references(() => usersTable.id, {
     onDelete: "cascade",
-  }),
+	}),
+
 });
 
 export const productsTable = sqliteTable("products_table", {
-  id: text("id").primaryKey(),
+  id: integer("id").primaryKey(),
   name: text("name").notNull(),
   description: text("description"),
   priceInPaisa: integer("price_in_paisa").notNull(),
@@ -46,7 +48,7 @@ export const productsTable = sqliteTable("products_table", {
 });
 
 export const ordersTable = sqliteTable("orders_table", {
-  id: text("id").primaryKey(),
+  id: integer("id").primaryKey(),
   userId: integer("user_id")
     .references(() => usersTable.id, {
       onDelete: "cascade",
@@ -70,7 +72,7 @@ export const ordersTable = sqliteTable("orders_table", {
 export const orderItemsTable = sqliteTable(
   "order_items_table",
   {
-    id: text("id").primaryKey(),
+    id: integer("id").primaryKey(),
     orderId: text("order_id")
       .references(() => ordersTable.id, {
         onDelete: "cascade",
@@ -86,3 +88,5 @@ export const orderItemsTable = sqliteTable(
   },
   (table) => [check("quantity_greater_than_zero_check", sql`${table.quantity}>0`)],
 );
+
+const IUserTable = <ReturnType<typeof usersTable>>;
