@@ -20,13 +20,13 @@ function generateSessionIdFromSessionToken(sessionToken: string) {
   return encodeHexLowerCase(sha256(new TextEncoder().encode(sessionToken)));
 }
 
-export async function createSession(
-  sessionToken: string,
-  userId: string,
-): Promise<{ sessionId: string; userId: string; expiresAt: Date }> {
-  assert(sessionToken.length > 0, "[error] [create_session] session token cannot be empty");
-  assert(userId.length > 0, "[error] [create_session] user id cannot be empty");
-
+export async function createSession({
+  sessionToken,
+  userId,
+}: {
+  sessionToken: string;
+  userId: number;
+}): Promise<{ sessionId: string; userId: number; expiresAt: Date }> {
   const sessionId = generateSessionIdFromSessionToken(sessionToken);
 
   const session = {

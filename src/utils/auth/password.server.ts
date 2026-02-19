@@ -1,7 +1,7 @@
-import { hash, verify } from "@node-rs/argon2";
+import { compare, genSalt, hash } from "bcryptjs";
 
 export async function hashPassword(password: string): Promise<string> {
-  return await hash(password, {});
+  return await hash(password, await genSalt());
 }
 
 export async function verifyPasswordHash({
@@ -11,5 +11,5 @@ export async function verifyPasswordHash({
   password: string;
   hash: string;
 }): Promise<boolean> {
-  return await verify(hash, password);
+  return await compare(hash, password);
 }
