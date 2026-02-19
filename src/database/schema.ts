@@ -1,35 +1,42 @@
 import { relations, sql } from "drizzle-orm";
-import { check, int, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { check, index, int, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
-export const usersTable = sqliteTable("users_table", {
-  id: integer("id").primaryKey(),
-  firstName: text("first_name").notNull(),
-  lastName: text("last_name").notNull(),
-  email: text("email").notNull().unique(),
-  passwordHash: text("password_hash").notNull(),
-  role: text("role", { enum: ["user", "admin"] }).notNull(),
-  createdAt: text("created_at")
-    .notNull()
-    .default(sql`(current_timestamp)`),
-  updatedAt: text("updated_at")
-    .notNull()
-    .default(sql`(current_timestamp)`)
-    .$onUpdateFn(() => sql`(current_timestamp)`),
-});
+export const usersTable = sqliteTable(
+  "users_table",
+  {
+    id: integer("id").primaryKey(),
+    firstName: text("first_name").notNull(),
+    lastName: text("last_name").notNull(),
+    email: text("email").notNull().unique(),
+    passwordHash: text("password_hash").notNull(),
+    role: text("role", { enum: ["user", "admin"] }).notNull(),
+    createdAt: text("created_at")
+      .notNull()
+      .default(sql`(current_timestamp)`),
+    updatedAt: text("updated_at")
+      .notNull()
+      .default(sql`(current_timestamp)`)
+      .$onUpdateFn(() => sql`(current_timestamp)`),
+  },
+  (table) => [index("email_index").on(table.email)],
+);
 
 export const userRelations = relations(usersTable, ({ many }) => ({
   sessions: many(sessionTable),
 }));
 
-export const sessionTable = sqliteTable("session_table", {
-  id: integer("id").primaryKey(),
-  sessionId: text("session_id"),
-  expiresAt: integer("expires_at", { mode: "timestamp_ms" }),
-  userId: text("user_id").references(() => usersTable.id, {
-    onDelete: "cascade",
-	}),
-
-});
+export const sessionTable = sqliteTable(
+  "session_table",
+  {
+    id: integer("id").primaryKey(),
+    sessionId: text("session_id"),
+    expiresAt: integer("expires_at", { mode: "timestamp_ms" }),
+    userId: integer("user_id").references(() => usersTable.id, {
+      onDelete: "cascade",
+    }),
+  },
+  (table) => [index("session_id_index").on(table.sessionId)],
+);
 
 export const productsTable = sqliteTable("products_table", {
   id: integer("id").primaryKey(),
@@ -88,5 +95,3 @@ export const orderItemsTable = sqliteTable(
   },
   (table) => [check("quantity_greater_than_zero_check", sql`${table.quantity}>0`)],
 );
-
-const IUserTable = <ReturnType<typeof usersTable>>;
