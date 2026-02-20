@@ -3,7 +3,7 @@ import { HTTP_STATUS_CODE_VALUES } from "./http-status-codes.utils";
 export interface ApiError {
   code: HTTP_STATUS_CODE_VALUES;
   message: string;
-  details?: string[];
+  details: string[];
 }
 // pagination.ts
 export interface Pagination {
