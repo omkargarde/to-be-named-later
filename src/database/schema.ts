@@ -1,4 +1,5 @@
 import { relations, sql } from "drizzle-orm";
+
 import { check, index, int, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 export const usersTable = sqliteTable(
@@ -9,7 +10,9 @@ export const usersTable = sqliteTable(
     lastName: text("last_name").notNull(),
     email: text("email").notNull().unique(),
     passwordHash: text("password_hash").notNull(),
-    role: text("role", { enum: ["user", "admin"] }).notNull(),
+    role: text("role", { enum: ["user", "admin"] })
+      .notNull()
+      .default("user"),
     createdAt: text("created_at")
       .notNull()
       .default(sql`(current_timestamp)`),
@@ -20,6 +23,8 @@ export const usersTable = sqliteTable(
   },
   (table) => [index("email_index").on(table.email)],
 );
+export type ISelectUser = typeof usersTable.$inferSelect;
+export type IInsertUser = typeof usersTable.$inferInsert;
 
 export const userRelations = relations(usersTable, ({ many }) => ({
   sessions: many(sessionTable),
@@ -37,6 +42,8 @@ export const sessionTable = sqliteTable(
   },
   (table) => [index("session_id_index").on(table.sessionId)],
 );
+export type ISelectSession = typeof sessionTable.$inferSelect;
+export type IInsertSession = typeof sessionTable.$inferInsert;
 
 export const productsTable = sqliteTable("products_table", {
   id: integer("id").primaryKey(),
@@ -53,6 +60,8 @@ export const productsTable = sqliteTable("products_table", {
     .default(sql`(current_timestamp)`)
     .$onUpdateFn(() => sql`(current_timestamp)`),
 });
+export type ISelectProduct = typeof productsTable.$inferSelect;
+export type IInsertProduct = typeof productsTable.$inferInsert;
 
 export const ordersTable = sqliteTable("orders_table", {
   id: integer("id").primaryKey(),
@@ -75,6 +84,8 @@ export const ordersTable = sqliteTable("orders_table", {
     .default(sql`(current_timestamp)`)
     .$onUpdateFn(() => sql`(current_timestamp)`),
 });
+export type ISelectOrder = typeof ordersTable.$inferSelect;
+export type IInsertOrder = typeof ordersTable.$inferInsert;
 
 export const orderItemsTable = sqliteTable(
   "order_items_table",
@@ -95,3 +106,5 @@ export const orderItemsTable = sqliteTable(
   },
   (table) => [check("quantity_greater_than_zero_check", sql`${table.quantity}>0`)],
 );
+export type ISelectOrderItem = typeof orderItemsTable.$inferSelect;
+export type IInsertOrderItem = typeof orderItemsTable.$inferInsert;
