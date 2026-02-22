@@ -1,4 +1,4 @@
-import { HTTP_STATUS_CODE_VALUES } from "./http-status-codes.utils";
+import { HTTP_STATUS_CODE_VALUES } from "@/utils/http-status-codes";
 
 export interface ApiError {
   code: HTTP_STATUS_CODE_VALUES;
