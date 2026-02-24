@@ -15,4 +15,8 @@ export interface Pagination {
 
 export type TApiResponse<T> = { ok: true; data: T };
 
+export type TApiErrorResponse = { ok: false; error: ApiError };
+
+export type TFetchResponse<T> = TApiResponse<T> | TApiErrorResponse;
+
 export type TApiResponseWithPagination<T> = { ok: true; data: T; pagination: Pagination };

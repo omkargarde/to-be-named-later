@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthSignUpRouteImport } from './routes/auth/sign-up'
 import { Route as ApiV1AuthSignUpRouteImport } from './routes/api/v1/auth/sign-up'
 import { Route as ApiV1AuthSignInRouteImport } from './routes/api/v1/auth/sign-in'
 import { Route as ApiV1AuthCurrentSessionRouteImport } from './routes/api/v1/auth/current-session'
@@ -17,6 +18,11 @@ import { Route as ApiV1AuthCurrentSessionRouteImport } from './routes/api/v1/aut
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthSignUpRoute = AuthSignUpRouteImport.update({
+  id: '/auth/sign-up',
+  path: '/auth/sign-up',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiV1AuthSignUpRoute = ApiV1AuthSignUpRouteImport.update({
@@ -37,12 +43,14 @@ const ApiV1AuthCurrentSessionRoute = ApiV1AuthCurrentSessionRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth/sign-up': typeof AuthSignUpRoute
   '/api/v1/auth/current-session': typeof ApiV1AuthCurrentSessionRoute
   '/api/v1/auth/sign-in': typeof ApiV1AuthSignInRoute
   '/api/v1/auth/sign-up': typeof ApiV1AuthSignUpRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth/sign-up': typeof AuthSignUpRoute
   '/api/v1/auth/current-session': typeof ApiV1AuthCurrentSessionRoute
   '/api/v1/auth/sign-in': typeof ApiV1AuthSignInRoute
   '/api/v1/auth/sign-up': typeof ApiV1AuthSignUpRoute
@@ -50,6 +58,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth/sign-up': typeof AuthSignUpRoute
   '/api/v1/auth/current-session': typeof ApiV1AuthCurrentSessionRoute
   '/api/v1/auth/sign-in': typeof ApiV1AuthSignInRoute
   '/api/v1/auth/sign-up': typeof ApiV1AuthSignUpRoute
@@ -58,18 +67,21 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth/sign-up'
     | '/api/v1/auth/current-session'
     | '/api/v1/auth/sign-in'
     | '/api/v1/auth/sign-up'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth/sign-up'
     | '/api/v1/auth/current-session'
     | '/api/v1/auth/sign-in'
     | '/api/v1/auth/sign-up'
   id:
     | '__root__'
     | '/'
+    | '/auth/sign-up'
     | '/api/v1/auth/current-session'
     | '/api/v1/auth/sign-in'
     | '/api/v1/auth/sign-up'
@@ -77,6 +89,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthSignUpRoute: typeof AuthSignUpRoute
   ApiV1AuthCurrentSessionRoute: typeof ApiV1AuthCurrentSessionRoute
   ApiV1AuthSignInRoute: typeof ApiV1AuthSignInRoute
   ApiV1AuthSignUpRoute: typeof ApiV1AuthSignUpRoute
@@ -89,6 +102,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/sign-up': {
+      id: '/auth/sign-up'
+      path: '/auth/sign-up'
+      fullPath: '/auth/sign-up'
+      preLoaderRoute: typeof AuthSignUpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/v1/auth/sign-up': {
@@ -117,6 +137,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthSignUpRoute: AuthSignUpRoute,
   ApiV1AuthCurrentSessionRoute: ApiV1AuthCurrentSessionRoute,
   ApiV1AuthSignInRoute: ApiV1AuthSignInRoute,
   ApiV1AuthSignUpRoute: ApiV1AuthSignUpRoute,
