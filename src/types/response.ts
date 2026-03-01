@@ -1,11 +1,11 @@
 import { HTTP_STATUS_CODE_VALUES } from "@/utils/http-status-codes";
 
-export interface ApiError {
+export interface IApiError {
   code: HTTP_STATUS_CODE_VALUES;
   message: string;
   details: string[];
 }
-export type TApiErrorResponse = { ok: false; error: ApiError };
+export type TApiErrorResponse = { ok: false; error: IApiError };
 
 // pagination.ts
 export interface Pagination {
@@ -15,8 +15,13 @@ export interface Pagination {
   totalPages: number;
 }
 
-export type TApiResponse<T> = { ok: true; code: HTTP_STATUS_CODE_VALUES; data: T };
+export interface IApiSuccess<T> {
+  code: HTTP_STATUS_CODE_VALUES;
+  values: T;
+}
 
-export type TFetchResponse<T> = TApiResponse<T> | TApiErrorResponse;
+export type TApiSuccessResponse<T> = { ok: true; data: IApiSuccess<T> };
+
+export type TFetchResponse<T> = TApiSuccessResponse<T> | TApiErrorResponse;
 
 export type TApiResponseWithPagination<T> = { ok: true; data: T; pagination: Pagination };
