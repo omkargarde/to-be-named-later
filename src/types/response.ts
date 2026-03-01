@@ -5,6 +5,8 @@ export interface ApiError {
   message: string;
   details: string[];
 }
+export type TApiErrorResponse = { ok: false; error: ApiError };
+
 // pagination.ts
 export interface Pagination {
   page: number;
@@ -13,9 +15,7 @@ export interface Pagination {
   totalPages: number;
 }
 
-export type TApiResponse<T> = { ok: true; data: T };
-
-export type TApiErrorResponse = { ok: false; error: ApiError };
+export type TApiResponse<T> = { ok: true; code: HTTP_STATUS_CODE_VALUES; data: T };
 
 export type TFetchResponse<T> = TApiResponse<T> | TApiErrorResponse;
 
