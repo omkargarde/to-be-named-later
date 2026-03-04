@@ -1,6 +1,7 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
   "plugins": ["react", "react-perf", "import", "jsx-a11y", "typescript", "promise", "eslint"],
+  "jsPlugins": ["oxlint-plugin-complexity"],
   "categories": {},
   "rules": {},
   "settings": {

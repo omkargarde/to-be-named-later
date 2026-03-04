@@ -11,7 +11,7 @@
 import { Route as rootRouteImport } from "./routes/__root";
 import { Route as ApiV1AuthCurrentSessionRouteImport } from "./routes/api/v1/auth/current-session";
 import { Route as ApiV1AuthSignInRouteImport } from "./routes/api/v1/auth/sign-in";
-import { Route as ApiV1AuthSignUpRouteImport } from "./routes/api/v1/auth/sign-up";
+import { Route as ApiV1AuthSignUpRouteImport } from "./routes/api/v1/auth/sign-up.server.ts";
 import { Route as AuthSignUpRouteImport } from "./routes/auth/sign-up";
 import { Route as IndexRouteImport } from "./routes/index";
 
