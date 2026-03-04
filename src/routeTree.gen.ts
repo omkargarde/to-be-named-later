@@ -8,130 +8,130 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from "./routes/__root";
-import { Route as ApiV1AuthCurrentSessionRouteImport } from "./routes/api/v1/auth/current-session";
-import { Route as ApiV1AuthSignInRouteImport } from "./routes/api/v1/auth/sign-in";
-import { Route as ApiV1AuthSignUpRouteImport } from "./routes/api/v1/auth/sign-up.server.ts";
-import { Route as AuthSignUpRouteImport } from "./routes/auth/sign-up";
-import { Route as IndexRouteImport } from "./routes/index";
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthSignUpRouteImport } from './routes/auth/sign-up'
+import { Route as ApiV1AuthSignInRouteImport } from './routes/api/v1/auth/sign-in'
+import { Route as ApiV1AuthCurrentSessionRouteImport } from './routes/api/v1/auth/current-session'
+import { Route as ApiV1AuthSignUpServerRouteImport } from './routes/api/v1/auth/sign-up.server'
 
 const IndexRoute = IndexRouteImport.update({
-  id: "/",
-  path: "/",
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const AuthSignUpRoute = AuthSignUpRouteImport.update({
-  id: "/auth/sign-up",
-  path: "/auth/sign-up",
+  id: '/auth/sign-up',
+  path: '/auth/sign-up',
   getParentRoute: () => rootRouteImport,
-} as any);
-const ApiV1AuthSignUpRoute = ApiV1AuthSignUpRouteImport.update({
-  id: "/api/v1/auth/sign-up",
-  path: "/api/v1/auth/sign-up",
-  getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const ApiV1AuthSignInRoute = ApiV1AuthSignInRouteImport.update({
-  id: "/api/v1/auth/sign-in",
-  path: "/api/v1/auth/sign-in",
+  id: '/api/v1/auth/sign-in',
+  path: '/api/v1/auth/sign-in',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const ApiV1AuthCurrentSessionRoute = ApiV1AuthCurrentSessionRouteImport.update({
-  id: "/api/v1/auth/current-session",
-  path: "/api/v1/auth/current-session",
+  id: '/api/v1/auth/current-session',
+  path: '/api/v1/auth/current-session',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
+const ApiV1AuthSignUpServerRoute = ApiV1AuthSignUpServerRouteImport.update({
+  id: '/api/v1/auth/sign-up/server',
+  path: '/api/v1/auth/sign-up/server',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
-  "/": typeof IndexRoute;
-  "/auth/sign-up": typeof AuthSignUpRoute;
-  "/api/v1/auth/current-session": typeof ApiV1AuthCurrentSessionRoute;
-  "/api/v1/auth/sign-in": typeof ApiV1AuthSignInRoute;
-  "/api/v1/auth/sign-up": typeof ApiV1AuthSignUpRoute;
+  '/': typeof IndexRoute
+  '/auth/sign-up': typeof AuthSignUpRoute
+  '/api/v1/auth/current-session': typeof ApiV1AuthCurrentSessionRoute
+  '/api/v1/auth/sign-in': typeof ApiV1AuthSignInRoute
+  '/api/v1/auth/sign-up/server': typeof ApiV1AuthSignUpServerRoute
 }
 export interface FileRoutesByTo {
-  "/": typeof IndexRoute;
-  "/auth/sign-up": typeof AuthSignUpRoute;
-  "/api/v1/auth/current-session": typeof ApiV1AuthCurrentSessionRoute;
-  "/api/v1/auth/sign-in": typeof ApiV1AuthSignInRoute;
-  "/api/v1/auth/sign-up": typeof ApiV1AuthSignUpRoute;
+  '/': typeof IndexRoute
+  '/auth/sign-up': typeof AuthSignUpRoute
+  '/api/v1/auth/current-session': typeof ApiV1AuthCurrentSessionRoute
+  '/api/v1/auth/sign-in': typeof ApiV1AuthSignInRoute
+  '/api/v1/auth/sign-up/server': typeof ApiV1AuthSignUpServerRoute
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport;
-  "/": typeof IndexRoute;
-  "/auth/sign-up": typeof AuthSignUpRoute;
-  "/api/v1/auth/current-session": typeof ApiV1AuthCurrentSessionRoute;
-  "/api/v1/auth/sign-in": typeof ApiV1AuthSignInRoute;
-  "/api/v1/auth/sign-up": typeof ApiV1AuthSignUpRoute;
+  __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/auth/sign-up': typeof AuthSignUpRoute
+  '/api/v1/auth/current-session': typeof ApiV1AuthCurrentSessionRoute
+  '/api/v1/auth/sign-in': typeof ApiV1AuthSignInRoute
+  '/api/v1/auth/sign-up/server': typeof ApiV1AuthSignUpServerRoute
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
+  fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | "/"
-    | "/auth/sign-up"
-    | "/api/v1/auth/current-session"
-    | "/api/v1/auth/sign-in"
-    | "/api/v1/auth/sign-up";
-  fileRoutesByTo: FileRoutesByTo;
+    | '/'
+    | '/auth/sign-up'
+    | '/api/v1/auth/current-session'
+    | '/api/v1/auth/sign-in'
+    | '/api/v1/auth/sign-up/server'
+  fileRoutesByTo: FileRoutesByTo
   to:
-    | "/"
-    | "/auth/sign-up"
-    | "/api/v1/auth/current-session"
-    | "/api/v1/auth/sign-in"
-    | "/api/v1/auth/sign-up";
+    | '/'
+    | '/auth/sign-up'
+    | '/api/v1/auth/current-session'
+    | '/api/v1/auth/sign-in'
+    | '/api/v1/auth/sign-up/server'
   id:
-    | "__root__"
-    | "/"
-    | "/auth/sign-up"
-    | "/api/v1/auth/current-session"
-    | "/api/v1/auth/sign-in"
-    | "/api/v1/auth/sign-up";
-  fileRoutesById: FileRoutesById;
+    | '__root__'
+    | '/'
+    | '/auth/sign-up'
+    | '/api/v1/auth/current-session'
+    | '/api/v1/auth/sign-in'
+    | '/api/v1/auth/sign-up/server'
+  fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  AuthSignUpRoute: typeof AuthSignUpRoute;
-  ApiV1AuthCurrentSessionRoute: typeof ApiV1AuthCurrentSessionRoute;
-  ApiV1AuthSignInRoute: typeof ApiV1AuthSignInRoute;
-  ApiV1AuthSignUpRoute: typeof ApiV1AuthSignUpRoute;
+  IndexRoute: typeof IndexRoute
+  AuthSignUpRoute: typeof AuthSignUpRoute
+  ApiV1AuthCurrentSessionRoute: typeof ApiV1AuthCurrentSessionRoute
+  ApiV1AuthSignInRoute: typeof ApiV1AuthSignInRoute
+  ApiV1AuthSignUpServerRoute: typeof ApiV1AuthSignUpServerRoute
 }
 
-declare module "@tanstack/react-router" {
+declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    "/": {
-      id: "/";
-      path: "/";
-      fullPath: "/";
-      preLoaderRoute: typeof IndexRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/auth/sign-up": {
-      id: "/auth/sign-up";
-      path: "/auth/sign-up";
-      fullPath: "/auth/sign-up";
-      preLoaderRoute: typeof AuthSignUpRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/api/v1/auth/sign-up": {
-      id: "/api/v1/auth/sign-up";
-      path: "/api/v1/auth/sign-up";
-      fullPath: "/api/v1/auth/sign-up";
-      preLoaderRoute: typeof ApiV1AuthSignUpRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/api/v1/auth/sign-in": {
-      id: "/api/v1/auth/sign-in";
-      path: "/api/v1/auth/sign-in";
-      fullPath: "/api/v1/auth/sign-in";
-      preLoaderRoute: typeof ApiV1AuthSignInRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/api/v1/auth/current-session": {
-      id: "/api/v1/auth/current-session";
-      path: "/api/v1/auth/current-session";
-      fullPath: "/api/v1/auth/current-session";
-      preLoaderRoute: typeof ApiV1AuthCurrentSessionRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/sign-up': {
+      id: '/auth/sign-up'
+      path: '/auth/sign-up'
+      fullPath: '/auth/sign-up'
+      preLoaderRoute: typeof AuthSignUpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/auth/sign-in': {
+      id: '/api/v1/auth/sign-in'
+      path: '/api/v1/auth/sign-in'
+      fullPath: '/api/v1/auth/sign-in'
+      preLoaderRoute: typeof ApiV1AuthSignInRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/auth/current-session': {
+      id: '/api/v1/auth/current-session'
+      path: '/api/v1/auth/current-session'
+      fullPath: '/api/v1/auth/current-session'
+      preLoaderRoute: typeof ApiV1AuthCurrentSessionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/auth/sign-up/server': {
+      id: '/api/v1/auth/sign-up/server'
+      path: '/api/v1/auth/sign-up/server'
+      fullPath: '/api/v1/auth/sign-up/server'
+      preLoaderRoute: typeof ApiV1AuthSignUpServerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -140,18 +140,17 @@ const rootRouteChildren: RootRouteChildren = {
   AuthSignUpRoute: AuthSignUpRoute,
   ApiV1AuthCurrentSessionRoute: ApiV1AuthCurrentSessionRoute,
   ApiV1AuthSignInRoute: ApiV1AuthSignInRoute,
-  ApiV1AuthSignUpRoute: ApiV1AuthSignUpRoute,
-};
+  ApiV1AuthSignUpServerRoute: ApiV1AuthSignUpServerRoute,
+}
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()
 
-import type { createStart } from "@tanstack/react-start";
-
-import type { getRouter } from "./router.tsx";
-declare module "@tanstack/react-start" {
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
   interface Register {
-    ssr: true;
-    router: Awaited<ReturnType<typeof getRouter>>;
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
   }
 }
