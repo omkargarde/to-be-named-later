@@ -10,15 +10,9 @@ import { eq } from "drizzle-orm";
  * @returns Result containing the user or null if not found on success,
  *          or an Error on failure
  */
-export async function getUserUsingEmail(
-  email: string,
-): Promise<Result<ISelectUser | null>> {
+export async function getUserUsingEmail(email: string): Promise<Result<ISelectUser | null>> {
   try {
-    const [user] = await orm
-      .select()
-      .from(usersTable)
-      .where(eq(usersTable.email, email))
-      .limit(1);
+    const [user] = await orm.select().from(usersTable).where(eq(usersTable.email, email)).limit(1);
     return { ok: true, value: user ?? null };
   } catch (error) {
     return {
@@ -35,9 +29,7 @@ export async function getUserUsingEmail(
  * @returns Result containing the created user on success,
  *          or an Error on failure
  */
-export async function createNewUser(
-  userData: IInsertUser,
-): Promise<Result<ISelectUser>> {
+export async function createNewUser(userData: IInsertUser): Promise<Result<ISelectUser>> {
   try {
     const [user] = await orm.insert(usersTable).values(userData).returning();
     return { ok: true, value: user };
