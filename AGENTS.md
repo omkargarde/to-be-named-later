@@ -1,4 +1,4 @@
-# guild lines for the project
+# Guild lines for the project
 
 - **IMPORTANT: Always use bun, do NOT use npm**
 - in zod v4 types like .string() are non-optional by default
